@@ -2,9 +2,10 @@
   <div class="home">
     <!-- <input type="text" value = {{searchFilter}} onChange={{(event) => searchFilter = event.target.value}}/> -->
     <h1>{{ message }}</h1>
-    <button v-on:click="sortedSchools">button</button>
+    <button v-on:click="sortSchool">button</button>
     <div v-for="school in schools">
       <p>{{ school[9] }}</p>
+      <p>{{ school[12] + school[13] }}</p>
       <button v-on:click="showSchool(school)">More Info </button>
       <hr />
     </div>
@@ -48,7 +49,20 @@ export default {
       this.currentSchool = school
       document.querySelector("#school-details").showModal();
     },
-    
+    sortSchool: function() {
+      console.log('hello')
+      function compare(a,b) {
+        if(a[9]  < b[9] ) {
+          return -1
+        }
+        if(a[9]  > b[9]) {
+          return 1
+        }
+        return 0
+      }
+      console.log(this.schools.sort(compare))
+      return this.schools.sort(compare)
+    }
   }
 }
   
